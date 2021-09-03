@@ -5,6 +5,7 @@ import Rating from "./Rating.js";
 function Product({ product }) {
   return (
     <div>
+      {/* p:padding m:margin y:both top and bottom */}
       <Card className="my-3 p-3 rounded">
         <a href={`/product/${product._id}`}>
           <Card.Img src={product.image}></Card.Img>
