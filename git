@@ -1,0 +1,13 @@
+user.email=tuenguyen553@gmail.com
+user.name=chituenguyen
+credential.helper=cache
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/chituenguyen/Do-An-CNPM.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+branch.tue.remote=origin
+branch.tue.merge=refs/heads/tue
