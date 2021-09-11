@@ -1,0 +1,30 @@
+:root{
+    --text-color:#55595c;
+}
+.product__item{
+    padding:10px;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.cart__proceed-total {
+    font-size:30px;
+    margin-right: 100px;
+
+}
+.btn__footer{
+    display: flex;
+    background-color: #fff !important;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.btn__checkout{
+   padding-left: 40px;
+   padding-right: 40px;
+   margin:auto;
+}
+.product__number select{
+   color:var(--tex-color);
+   padding:5px 40px 5px;
+   border:none;
+   outline:none;
+   background-color: rgba(194, 188, 188, 0.1);
+}
