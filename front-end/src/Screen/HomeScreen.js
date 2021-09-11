@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import products from "./../products";
 import { Row, Col } from "react-bootstrap";
 import Product from "./../components/Product";
 import axios from "axios";
@@ -13,7 +12,6 @@ function HomeScreen() {
       setProducts(data);
     }
     fetchProducts();
-    console.log("Use effect");
   }, []);
   console.log(products);
   return (
