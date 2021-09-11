@@ -1,4 +1,4 @@
-#!/home/tue2910/Desktop/do an cnpm /my_env/bin/python3
+#!/home/mikey/Desktop/HK211/CNPM/Do-An-CNPM/my_env/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

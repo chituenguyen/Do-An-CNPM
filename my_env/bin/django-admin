@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/home/tue2910/Desktop/do an cnpm /my_env/bin/python3" "$0" "$@"
-' '''
+#!/home/mikey/Desktop/HK211/CNPM/Do-An-CNPM/my_env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
