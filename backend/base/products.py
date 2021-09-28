@@ -1,7 +1,7 @@
 products = [
     {
         '_id': "1",
-        'name': "Mon ngon moi ngay",
+        'name': "Mon ngon moi ngay 1",
         'image': "/images/food.jpg",
         'description':
         "Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working",
