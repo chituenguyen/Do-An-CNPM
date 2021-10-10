@@ -1,4 +1,5 @@
-import React from "react";
+import { React, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Row,
   Col,
@@ -9,15 +10,23 @@ import {
   Form,
   ListGroupItem,
 } from "react-bootstrap";
-
-import products from "../products";
-
 import { Link } from "react-router-dom";
+import { addToCart } from "../action/cartActions";
 
-function CartScreen() {
+function CartScreen({ match, history }) {
+  const products = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+  const matchId = parseInt(history.location.pathname.slice(6));
+  const qty = parseInt(history.location.search.slice(5));
+  console.log(qty);
+
+  useEffect(() => {
+    dispatch(addToCart(matchId, qty));
+  }, [dispatch, matchId, qty]);
+
   return (
     <div>
-      <Link to="/" className="btn btn-light my-3">
+      <Link to="/" className="btn btn-primary my-3">
         Go Back
       </Link>
       <Row>
@@ -29,7 +38,7 @@ function CartScreen() {
                 <Row>
                   <Col md={2}>
                     <Image
-                      src={`${product.image}`}
+                      src={`${product.product.image}`}
                       style={{
                         width: "60px",
                       }}
@@ -37,17 +46,19 @@ function CartScreen() {
                     />
                   </Col>
 
-                  <Col md={3}>{product.name}</Col>
+                  <Col md={3}>{product.product.name}</Col>
 
-                  <Col md={2}>${product.price}</Col>
+                  <Col md={2}>${product.product.price}</Col>
 
                   <Col md={2}>
-                    <Form.Control as="select" defaultValue={1}>
-                      {[...Array(product.countInStock).keys()].map((x) => (
-                        <option value={x + 1} key={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
+                    <Form.Control as="select" defaultValue={product.quantity}>
+                      {[...Array(product.product.count_Stock).keys()].map(
+                        (x) => (
+                          <option value={x + 1} key={x + 1}>
+                            {x + 1}
+                          </option>
+                        )
+                      )}
                     </Form.Control>
                   </Col>
 

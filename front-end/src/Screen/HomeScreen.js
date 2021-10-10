@@ -12,7 +12,7 @@ function HomeScreen() {
   );
   useEffect(() => {
     dispatch(listProducts());
-  }, []);
+  }, [dispatch]);
   return (
     <div>
       <h1>Lastest products</h1>

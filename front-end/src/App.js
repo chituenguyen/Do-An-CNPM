@@ -31,7 +31,7 @@ function App() {
             component={AdminProductListScreen}
           ></Route>
           <Route path="/profile/" component={ProfileScreen} />
-          <Route path="/cart/" component={CartScreen} />
+          <Route path="/cart/:id?" component={CartScreen} />
         </Container>
       </main>
       <Footer></Footer>
