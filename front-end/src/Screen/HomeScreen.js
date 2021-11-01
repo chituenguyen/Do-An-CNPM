@@ -4,7 +4,7 @@ import Product from "./../components/Product";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../action/productAction";
 import { Spinner } from "react-bootstrap";
-
+import "./../static/homeScreen.css";
 function HomeScreen() {
   const dispatch = useDispatch();
   const { loading, error, products } = useSelector(
@@ -15,7 +15,8 @@ function HomeScreen() {
   }, [dispatch]);
   return (
     <div>
-      <h1>Lastest products</h1>
+      <h3 class="sub-heading"> our dishes </h3>
+      <h1 class="heading"> popular dishes </h1>
       {error ? (
         <h3>{error}</h3>
       ) : loading ? (

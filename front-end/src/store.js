@@ -13,13 +13,12 @@ const reducers = combineReducers({
   cart: cartReducers,
 });
 
-const cartItemsFromLocalStorage = localStorage.getItem("cartItems")
-  ? JSON.parse(localStorage.getItem("cartItems"))
-  : [];
+// const cartItemsFromLocalStorage = localStorage.getItem("cartItems")
+//   ? JSON.parse(localStorage.getItem("cartItems"))
+//   : [];
 const initialState = {
-  cart: { cartItems: cartItemsFromLocalStorage },
+  // cart: { cartItems: cartItemsFromLocalStorage },
 };
-console.log(initialState);
 const middleware = [thunk];
 
 const store = createStore(

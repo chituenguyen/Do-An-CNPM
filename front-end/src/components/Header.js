@@ -1,37 +1,31 @@
 import React from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-
+import "./../static/header.css";
 function Header() {
   return (
     <header>
-      <Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect>
-        <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>Name of shop</Navbar.Brand>
-          </LinkContainer>
+      <a href="#" class="logo">
+        <i class="fas fa-utensils"></i>resto.
+      </a>
 
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="mr-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <LinkContainer to="/cart">
-                <Nav.Link>
-                  <i className="fas fa-cart-plus"></i>Cart
-                </Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/login">
-                <Nav.Link>
-                  <i className="fas fa-user"></i>Login
-                </Nav.Link>
-              </LinkContainer>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <nav class="navbar">
+        <a class="active" href="#home">
+          home
+        </a>
+        <a href="#dishes">dishes</a>
+        <a href="#about">about</a>
+        <a href="#menu">menu</a>
+        <a href="#review">review</a>
+        <a href="#order">order</a>
+      </nav>
+
+      <div class="icons">
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <i class="fas fa-search" id="search-icon"></i>
+        <a href="#" class="fas fa-heart"></a>
+        <a href="#" class="fas fa-shopping-cart"></a>
+      </div>
     </header>
   );
 }

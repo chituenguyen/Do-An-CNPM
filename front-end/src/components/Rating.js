@@ -1,11 +1,11 @@
 import React from "react";
 
-function Rating({ value, text, color }) {
+function Rating({ value, color }) {
   return (
     <div className="ating">
       <span>
         <i
-          style={{ color }}
+          style={{ color, fontSize: "1.7rem" }}
           className={
             value >= 1
               ? "fas fa-star"
@@ -17,7 +17,7 @@ function Rating({ value, text, color }) {
       </span>
       <span>
         <i
-          style={{ color }}
+          style={{ color, fontSize: "1.7rem" }}
           className={
             value >= 2
               ? "fas fa-star"
@@ -29,7 +29,7 @@ function Rating({ value, text, color }) {
       </span>
       <span>
         <i
-          style={{ color }}
+          style={{ color, fontSize: "1.7rem" }}
           className={
             value >= 3
               ? "fas fa-star"
@@ -41,7 +41,7 @@ function Rating({ value, text, color }) {
       </span>
       <span>
         <i
-          style={{ color }}
+          style={{ color, fontSize: "1.7rem" }}
           className={
             value >= 4
               ? "fas fa-star"
@@ -53,7 +53,7 @@ function Rating({ value, text, color }) {
       </span>
       <span>
         <i
-          style={{ color }}
+          style={{ color, fontSize: "1.7rem" }}
           className={
             value >= 5
               ? "fas fa-star"
@@ -63,7 +63,6 @@ function Rating({ value, text, color }) {
           }
         ></i>
       </span>
-      <span>{text}</span>
     </div>
   );
 }
