@@ -20,14 +20,7 @@ function ProductScreen({ match, history }) {
   const { error, loading, product } = useSelector(
     (state) => state.productDetail
   );
-  // const AddToCartHandler = () => {
-  //   console.log(match.params.id);
-  //   console.log(history);
-  //   history.push(`/cart/${match.params.id}?qty=${qty}`);
-  //   dispatch(addToCart(match.params.id, qty));
-  // };
   const AddToCartHandler = () => {
-    console.log("cart");
     history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
   useEffect(() => {
