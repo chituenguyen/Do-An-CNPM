@@ -28,6 +28,11 @@ function Header() {
                   <i className="fas fa-user"></i>Login
                 </Nav.Link>
               </LinkContainer>
+              <LinkContainer to="/profile">
+                <Nav.Link>
+                  <i class="far fa-user-circle"></i>Viet
+                </Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>
