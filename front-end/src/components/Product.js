@@ -8,14 +8,15 @@ function Product({ product }) {
   return (
     <div>
       {/* p:padding m:margin y:both top and bottom */}
-      <div class="box">
-        <a href="#" class="fas fa-heart"></a>
-        <a href="#" class="fas fa-eye"></a>
-        <Card.Img src={product.image}></Card.Img>
-        <h3>tasty food</h3>
-        <Rating value={product.rating} color={"var(--green)"}></Rating>
-        <span>$15.99</span>
-      </div>
+      <Link to={`product/${product._id}`} style={{ textDecoration: "none" }}>
+        <div class="box" style={{ cursor: "pointer" }}>
+          <a href="#" class="fas fa-eye"></a>
+          <Card.Img src={product.image}></Card.Img>
+          <h3 style={{ height: "50px" }}>{product.name}</h3>
+          <Rating value={product.rating} color={"var(--green)"}></Rating>
+          <span>$15.99</span>
+        </div>
+      </Link>
     </div>
   );
 }
