@@ -2,7 +2,7 @@ import React from "react";
 
 function Rating({ value, color }) {
   return (
-    <div className="ating">
+    <div className="rating">
       <span>
         <i
           style={{ color, fontSize: "1.7rem" }}
