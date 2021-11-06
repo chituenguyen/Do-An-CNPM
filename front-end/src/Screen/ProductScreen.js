@@ -32,15 +32,16 @@ function ProductScreen({ match, history }) {
         Go Back
       </Link>
       <Row>
-        <Col md={6}>
+        <Col md={4} style={{ textAlign: "center" }}>
           <Image
             src={product.image}
             alt={product.name}
+            style={{ width: "70%" }}
             className="imageProduct"
           ></Image>
         </Col>
 
-        <Col md={3}>
+        <Col md={3} style={{ marginRight: "40px" }}>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h3>{product.name}</h3>
@@ -83,7 +84,7 @@ function ProductScreen({ match, history }) {
                 <ListGroup.Item>
                   <Row xs="auto" className="my-1">
                     <Col>Quantity: </Col>
-                    <Col style={{ marginLeft: "50px" }}>
+                    <Col style={{ margin: "auto" }}>
                       <Form.Control
                         as="select"
                         defaultValue={qty}
