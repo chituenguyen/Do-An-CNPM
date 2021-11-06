@@ -1,15 +1,19 @@
 import React from "react";
-import { Nav, Navbar, Container } from "react-bootstrap";
+import { Nav, Navbar, Container, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import "./../static/header.css";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "./../action/userAction";
 import { useState } from "react";
+
 const NavBarAccount = () => {
   return (
     <div className="navbar-account">
       <i class="fas fa-users navbar-account-user"></i>
       <div className="navbar-account-io">
         <p className="navbar-logio">
-          <a href="">Sign in</a> / <a href="">sign up</a>
+          <a href="/login">Sign in</a> / <a href="">sign up</a>
         </p>
         <p className="navbar-account-nick">
           Account
@@ -20,6 +24,17 @@ const NavBarAccount = () => {
   );
 };
 const NavBarUser = ({ avatar }) => {
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const userRegister = useSelector((state) => state.userRegister);
+  const userInfo_Register = userRegister.userInfo;
+  var { userInfo } = userLogin;
+  if (userInfo_Register !== null) {
+    userInfo = userInfo_Register;
+  }
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   const [show, setShow] = useState("hide");
   const handleShow = () => {
     setShow(show === "hide" ? "show" : "hide");
@@ -31,7 +46,7 @@ const NavBarUser = ({ avatar }) => {
         alt={avatar[0].name}
         className="navbar-user-img"
       />
-      <span className="navbar-user-name">{avatar[0].name}</span>
+      <span className="navbar-user-name">{userInfo.name}</span>
       {show === "show" ? (
         <ul className="navbar-user-menu">
           <li>
@@ -59,7 +74,7 @@ const NavBarUser = ({ avatar }) => {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="" onClick={handleLogout}>
               <i class="fas fa-sign-out-alt"></i>
               Logout
             </a>
@@ -73,11 +88,17 @@ const NavBarUser = ({ avatar }) => {
 };
 function Header() {
   // if true is login else false is sign up hoac sign in
-  const [user, setUser] = useState(false);
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const userRegister = useSelector((state) => state.userRegister);
+  const userInfo_Register = userRegister.userInfo;
+  var { userInfo } = userLogin;
+  if (userInfo_Register !== null) {
+    userInfo = userInfo_Register;
+  }
   const avatar = [
     {
       id: 1,
-      name: "Ole Gunnar Solskjær",
       img: "https://sohanews.sohacdn.com/thumb_w/660/160588918557773824/2021/10/25/photo1635121949916-1635121950037228899134.jpeg",
     },
   ];
@@ -96,7 +117,7 @@ function Header() {
         <a href="/">menu</a>
         <a href="/">review</a>
       </nav>
-
+      {userInfo ? <NavBarUser avatar={avatar} /> : <NavBarAccount />}
       <div class="icons">
         <i class="fas fa-bars" id="menu-bars"></i>
         <i class="fas fa-search" id="search-icon"></i>
@@ -105,7 +126,6 @@ function Header() {
       </div>
 
       {/* NavBarUser */}
-      {user ? <NavBarUser avatar={avatar} /> : <NavBarAccount />}
     </header>
   );
 }

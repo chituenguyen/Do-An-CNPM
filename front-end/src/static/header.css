@@ -70,7 +70,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  background: #fff;
+  background:#8de374;
   padding: 1rem 7%;
   display: flex;
   align-items: center;
@@ -191,7 +191,7 @@ header .icons #menu-bars {
   padding: 8px 16px;
 }
 /* Phần nhô tam giác của navbar mà do background màu trắng nên không thấy. Muốn thấy thì phải đổi màu header lại */
-/* .navbar-user-menu::before {
+.navbar-user-menu::before {
   content: "";
   top: -22px;
   right: 40%;
@@ -200,7 +200,7 @@ header .icons #menu-bars {
   border-style: solid;
   cursor: pointer;
   border-color: transparent transparent var(--white-color) transparent;
-} */
+}
 /* NavBarAccount */
 .navbar-account {
   display: flex;
