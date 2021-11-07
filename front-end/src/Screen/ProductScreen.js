@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Row,
@@ -10,58 +10,38 @@ import {
   Form,
 } from "react-bootstrap";
 import Rating from "../components/Rating";
-import products from "../products";
+import { useSelector, useDispatch } from "react-redux";
+import { listProductDetail } from "../action/productAction";
+import { addToCart } from "../action/cartActions";
 
-function ProductScreen({ match }) {
-  console.log(products);
-  console.log(match);
-  const [qty, setQty] = useState(0);
-  const product = products.find((p) => p._id === match.params.id);
-  console.log(product);
+function ProductScreen({ match, history }) {
+  const [qty, setQty] = useState(1);
+  const dispatch = useDispatch();
+  const { error, loading, product } = useSelector(
+    (state) => state.productDetail
+  );
+  const AddToCartHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
+  useEffect(() => {
+    dispatch(listProductDetail(match.params.id));
+  }, [dispatch, match.params.id]);
   return (
     <div>
-      {/* <Row>
-        <Col md={6}>
-          <Image src={product.image}></Image>
-        </Col>
-        <Col>
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h3>{product.name}</h3>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Rating
-                value={product.rating}
-                text={`${product.numReviews} reviews`}
-                color={"#f8e825"}
-              ></Rating>
-            </ListGroup.Item>
-            <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
-            <ListGroup.Item>{product.description}</ListGroup.Item>
-          </ListGroup>
-        </Col>
-        <Col>
-          <ListGroup>
-            <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
-            <ListGroup.Item>
-              Status :{" "}
-              {product.countInStock > 0 ? "In stock" : "Out of in stock"}
-            </ListGroup.Item>
-            <ListGroup.Item></ListGroup.Item>
-          </ListGroup>
-        </Col>
-      </Row> */}
-
-      {/* <Row>
-        <Col md={6}>
+      <Link to="/" className="btn btn-primary my-3">
+        Go Back
+      </Link>
+      <Row>
+        <Col md={4} style={{ textAlign: "center" }}>
           <Image
             src={product.image}
             alt={product.name}
+            style={{ width: "70%" }}
             className="imageProduct"
           ></Image>
         </Col>
 
-        <Col md={3}>
+        <Col md={3} style={{ marginRight: "40px" }}>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h3>{product.name}</h3>
@@ -69,7 +49,7 @@ function ProductScreen({ match }) {
             <ListGroup.Item>
               <Rating
                 value={product.rating}
-                text={`${product.numReviews} reviews`}
+                text={`${product.num_Reviews} reviews`}
                 color={"#f8e825"}
               />
             </ListGroup.Item>
@@ -94,17 +74,17 @@ function ProductScreen({ match }) {
                   <Col>Status:</Col>
                   <Col>
                     <strong>
-                      {product.countInStock > 0 ? "Instock" : "Out of stock"}
+                      {product.count_Stock > 0 ? "Instock" : "Out of stock"}
                     </strong>
                   </Col>
                 </Row>
               </ListGroup.Item>
 
-              {product.countInStock > 0 && (
+              {product.count_Stock > 0 && (
                 <ListGroup.Item>
                   <Row xs="auto" className="my-1">
-                    <Col>Quantity:</Col>
-                    <Col>
+                    <Col>Quantity: </Col>
+                    <Col style={{ margin: "auto" }}>
                       <Form.Control
                         as="select"
                         defaultValue={qty}
@@ -112,7 +92,7 @@ function ProductScreen({ match }) {
                           setQty(e.target.value);
                         }}
                       >
-                        {[...Array(product.countInStock).keys()].map((x) => (
+                        {[...Array(product.count_Stock).keys()].map((x) => (
                           <option value={x + 1} key={x + 1}>
                             {x + 1}
                           </option>
@@ -125,8 +105,10 @@ function ProductScreen({ match }) {
 
               <ListGroup.Item>
                 <Button
+                  onClick={AddToCartHandler}
                   className="btn-block"
-                  disabled={product.countInStock == 0}
+                  disabled={product.count_Stock === 0}
+                  style={{ width: "100%" }}
                 >
                   Add to cart
                 </Button>
@@ -134,7 +116,7 @@ function ProductScreen({ match }) {
             </ListGroup>
           </Card>
         </Col>
-      </Row> */}
+      </Row>
     </div>
   );
 }
