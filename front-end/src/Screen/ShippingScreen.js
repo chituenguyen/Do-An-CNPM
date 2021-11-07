@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "./../action/userAction";
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
+//import { useEffect, useState } from 'react';
 function ShippingScreen() {
 
 // const handleSubmit=(e) => {
@@ -16,12 +17,25 @@ function ShippingScreen() {
 //   console.log("ahihi");
 
 // }
+const [loading, setLoading] = useState(true);
+useEffect(() => {
+  setTimeout(() => {
+    setLoading(false);
+  }, 1500);
+});
 
-  return <FormContainer>
 
-    <div class="loader">
-      <div class="loader_content"></div>
+
+  return <div>
+  {loading ? (
+    <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
     </div>
+    
+  ) : (
+    <FormContainer>
+
+
 
     <div class="main_content">
     <div class="heading_shipping heading">
@@ -73,13 +87,14 @@ function ShippingScreen() {
       </Form>  
     </div>
 
-    <div class="loader-wrapper">
-      <span class="loader"><span class="loader-inner"></span></span>
-    </div>
+
   
+   
 
 
-  </FormContainer>;
+  </FormContainer>
+  )}
+  </div>
 }
 
 export default ShippingScreen;
