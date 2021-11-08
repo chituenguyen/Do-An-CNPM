@@ -105,7 +105,7 @@ function Header() {
   return (
     <header>
       <a href="/" class="logo">
-        <i class="fas fa-utensils"></i>Sharingan
+        <i class="fas fa-utensils"></i>Konoha
       </a>
 
       <nav class="navbar">
