@@ -13,7 +13,7 @@ const NavBarAccount = () => {
       <i class="fas fa-users navbar-account-user"></i>
       <div className="navbar-account-io">
         <p className="navbar-logio">
-          <a href="/login">Sign in</a> / <a href="">sign up</a>
+          <a href="/login">Sign in</a> / <a href="/register">sign up</a>
         </p>
         <p className="navbar-account-nick">
           Account
@@ -105,7 +105,7 @@ function Header() {
   return (
     <header>
       <a href="/" class="logo">
-        <i class="fas fa-utensils"></i>Sharingan
+        <i class="fas fa-utensils"></i>Konoha
       </a>
 
       <nav class="navbar">
