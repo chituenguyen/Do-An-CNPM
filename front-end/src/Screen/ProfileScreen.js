@@ -6,10 +6,11 @@ import Table from "react-bootstrap/Table";
 import styled from "styled-components";
 
 const StyleForm = styled.div`
-  h3 {
+  h2 {
     margin-top: 20px;
     margin-bottom: 40px;
     font-weight: 900;
+    font-size:25px;
   }
   #name {
     margin-bottom: 20px;
@@ -23,10 +24,11 @@ const StyleForm = styled.div`
 `;
 
 const StyleTable = styled.div`
-  h3 {
+  h2 {
     margin-top: 20px;
     margin-bottom: 40px;
     font-weight: 900;
+    font-size: 25px;
   }
   button {
     padding: 5px;
@@ -51,7 +53,7 @@ function ProfileScreen() {
     <Row>
       <Col md={3}>
         <StyleForm>
-          <h3>User profile</h3>
+          <h2>User profile</h2>
 
           <Form.Group controlId="name">
             <Form.Label>Name</Form.Label>
@@ -83,15 +85,40 @@ function ProfileScreen() {
       </Col>
       <Col md={8} style={{ marginLeft: "30px" }}>
         <StyleTable>
-          <h3>My orders</h3>
-          <Table striped bordered hover size="sm">
+          <h2>My orders</h2>
+          <Table striped bordered hover variant="red" size="sm">
             <thead>
-              <tr>
-                <th style={{ width: "10%", color: "#000" }}>ID</th>
-                <th style={{ width: "20%", color: "#000" }}>DATE</th>
-                <th style={{ width: "15%", color: "#000" }}>TOTAL</th>
-                <th style={{ width: "35%", color: "#000" }}>PAID</th>
-                <th style={{ width: "20%", color: "#000" }}>DELIVERED</th>
+              <tr style={{ fontSize: "20px" }}>
+                <th
+                  class="table-danger"
+                  style={{ width: "10%", color: "#000", fontSize: "15px" }}
+                >
+                  ID
+                </th>
+                <th
+                  class="table-danger"
+                  style={{ width: "20%", color: "#000", fontSize: "15px" }}
+                >
+                  DATE
+                </th>
+                <th
+                  class="table-danger"
+                  style={{ width: "15%", color: "#000", fontSize: "15px" }}
+                >
+                  TOTAL
+                </th>
+                <th
+                  class="table-danger"
+                  style={{ width: "35%", color: "#000", fontSize: "15px" }}
+                >
+                  PAID
+                </th>
+                <th
+                  class="table-danger"
+                  style={{ width: "20%", color: "#000", fontSize: "15px" }}
+                >
+                  DELIVERED
+                </th>
               </tr>
             </thead>
             <tbody>
