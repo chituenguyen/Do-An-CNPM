@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "./../action/userAction";
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 //import { useEffect, useState } from 'react';
 function ShippingScreen() {
