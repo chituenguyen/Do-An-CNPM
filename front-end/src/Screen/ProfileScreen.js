@@ -2,25 +2,42 @@ import React from "react";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Table from "react-bootstrap/Table";
 import styled from "styled-components";
 
-const Styles = styled.div`
+const StyleForm = styled.div`
   h3 {
     margin-top: 20px;
     margin-bottom: 40px;
+    font-weight: 900;
   }
   #name {
     margin-bottom: 20px;
   }
   #footer {
   }
-  Button {
-    margin-top: 30px;
-  }
   .py-3 {
     margin-top: 20px;
   }
+  font-size: 15px;
 `;
+
+const StyleTable = styled.div`
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-weight: 900;
+  }
+  button {
+    padding: 5px;
+    width: 80px;
+    background-color: #000;
+    text-color: #1a1a1a;
+    margin: auto;
+    margin-left: 14px;
+  }
+`;
+
 
 function ProfileScreen() {
   const [email, setEmail] = useState("");
@@ -32,8 +49,8 @@ function ProfileScreen() {
 
   return (
     <Row>
-      <Col md={4}>
-        <Styles>
+      <Col md={3}>
+        <StyleForm>
           <h3>User profile</h3>
 
           <Form.Group controlId="name">
@@ -62,46 +79,61 @@ function ProfileScreen() {
               Update profile
             </Button>
           </Form>
-        </Styles>
+        </StyleForm>
       </Col>
-      <Col md={8}>
-        <Styles>
+      <Col md={8} style={{ marginLeft: "30px" }}>
+        <StyleTable>
           <h3>My orders</h3>
-          <Row style={{ background: "#808080" }}>
-            <Col md={1}>
-              <h5>Id</h5>
-            </Col>
-            <Col md={2}>
-              <h5>Date</h5>
-            </Col>
-            <Col md={2}>
-              <h5>Total</h5>
-            </Col>
-            <Col md={4}>
-              <h5>Paid</h5>
-            </Col>
-            <Col md={2}>
-              <h5>Delivered</h5>
-            </Col>
-          </Row>
-          <Row style={{ background: "#ffffff" }}>
-            <Col md={1} controlId="id">
-              a
-            </Col>
-            <Col md={2} controlId="date">
-              b
-            </Col>
-            <Col md={2} controlId="total">
-              c
-            </Col>
-            <Col md={4} controlId="paid">
-              d
-            </Col>
-            <Col md={2} controlId="delivered">
-              e
-            </Col>
-          </Row>
-        </Styles>
+          <Table striped bordered hover size="sm">
+            <thead>
+              <tr>
+                <th style={{ width: "10%", color: "#000" }}>ID</th>
+                <th style={{ width: "20%", color: "#000" }}>DATE</th>
+                <th style={{ width: "15%", color: "#000" }}>TOTAL</th>
+                <th style={{ width: "35%", color: "#000" }}>PAID</th>
+                <th style={{ width: "20%", color: "#000" }}>DELIVERED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>
+                  <Button>Detail</Button>
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>
+                  <Button>Detail</Button>
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>
+                  <Button>Detail</Button>
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>
+                  <Button>Detail</Button>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </StyleTable>
       </Col>
     </Row>
   );
