@@ -25,8 +25,9 @@ function CartScreen({ match, history, location }) {
   }, [dispatch, productId, qty]);
   const cart = useSelector((state) => state.cart);
   const products = cart.cartItems;
-  console.log("loop");
-  console.log(products.map((product) => console.log(product.quantity)));
+  const checkout = () => {
+    history.push("/login?redirect=shipping");
+  };
   return (
     <div>
       <Link to="/" className="btn btn-primary my-3">
@@ -91,7 +92,11 @@ function CartScreen({ match, history, location }) {
                 $1000
               </ListGroupItem>
               <ListGroupItem className="d-grid gap-2">
-                <Button type="button" className="btn-block">
+                <Button
+                  type="button"
+                  className="btn-block"
+                  onClick={() => checkout()}
+                >
                   Process To Checkout
                 </Button>
               </ListGroupItem>

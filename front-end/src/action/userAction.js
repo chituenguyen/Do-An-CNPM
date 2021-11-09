@@ -6,6 +6,9 @@ import {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_REQUEST,
   USER_REGISTER_FAIL,
+  USER_GET_PROFILE_REQUEST,
+  USER_GET_PROFILE_SUCCESS,
+  USER_GET_PROFILE_FAIL,
 } from "./../constants/userConstants";
 
 import axios from "axios";
@@ -87,3 +90,32 @@ export const register =
       });
     }
   };
+
+export const user_get_profile = (token) => async (dispatch) => {
+  console.log("token", token);
+  try {
+    dispatch({
+      type: USER_GET_PROFILE_REQUEST,
+    });
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const { data } = await axios.get("/api/profile/", config);
+    console.log(data);
+    dispatch({
+      type: USER_GET_PROFILE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_GET_PROFILE_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
