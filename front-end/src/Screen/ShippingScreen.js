@@ -1,99 +1,87 @@
 import React from "react";
-import "./../static/shipping.css"
-//import { Form, Button, Row, Col, Alert } from "react-bootstrap";
+import "./../static/shipping.css";
 import FormContainer from "../components/FormContainer";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "./../action/userAction";
-import { Form, Button, Row, Col, Alert } from "react-bootstrap";
-//import { useEffect, useState } from 'react';
-function ShippingScreen() {
+import { Form, Button, Row, Col } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { saveShippingAddress } from "./../action/cartActions";
+import Checkout from "./../components/Checkout";
+function ShippingScreen({ history }) {
+  const cart = useSelector((state) => state.cart);
+  const { shipping } = cart;
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  });
+  const [address, setAddress] = useState(
+    shipping.address ? shipping.address : ""
+  );
+  const [city, setCity] = useState(shipping.city ? shipping.city : "");
+  const [country, setCountry] = useState(
+    shipping.country ? shipping.country : ""
+  );
+  const submitHandle = (e) => {
+    e.preventDefault();
+    dispatch(saveShippingAddress({ address, city, country }));
+    history.push("/placeorder");
+  };
+  return (
+    <div>
+      {loading ? (
+        <div class="loader-wrapper">
+          <span class="loader">
+            <span class="loader-inner"></span>
+          </span>
+        </div>
+      ) : (
+        <FormContainer>
+          <Checkout step1 step2></Checkout>
+          <Form onSubmit={submitHandle}>
+            <h1>Shipping</h1>
+            <Form.Group controlId="address">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Enter your address"
+                value={address ? address : ""}
+                onChange={(e) => setAddress(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-// const handleSubmit=(e) => {
-//   e.preventDefault();
-//   console.log("ahihi");
+            <Form.Group controlId="city">
+              <Form.Label>City</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Enter your city"
+                value={city ? city : ""}
+                onChange={(e) => setCity(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-// }
-const [loading, setLoading] = useState(true);
-useEffect(() => {
-  setTimeout(() => {
-    setLoading(false);
-  }, 1500);
-});
+            <Form.Group controlId="country">
+              <Form.Label>Country</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Enter your country"
+                value={country ? country : ""}
+                onChange={(e) => setCountry(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-
-
-  return <div>
-  {loading ? (
-    <div class="loader-wrapper">
-      <span class="loader"><span class="loader-inner"></span></span>
+            <Button variant="primary" type="submit">
+              Continue
+            </Button>
+          </Form>
+        </FormContainer>
+      )}
     </div>
-    
-  ) : (
-    <FormContainer>
-
-
-
-    <div class="main_content">
-    <div class="heading_shipping heading">
-        <h1 >Shipping</h1>
-        <img src="https://www.pngitem.com/pimgs/m/479-4796343_free-shipping-png-fast-shipping-icon-png-transparent.png" height='40 em'/>
-    </div>
-      
-       {/* <Form onSubmit={handleSubmit}>*/}
-       <Form>
-          <Form.Group as={Row} className="mb-3 title_shiping" controlId="validationCustom01">
-            <Form.Label column sm="3">Receiver's Name:</Form.Label>
-            <Col sm='9'>
-            <Form.Control
-              required
-              type="text"
-              placeholder="Enter Receiver's Name"
-              defaultValue=""
-            />
-          {/*  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>*/}
-            </Col>
-          </Form.Group>
-
-          <Form.Group as={Row} className="mb-3 title_shiping" controlId="formHorizontalEmail">
-          <Form.Label column sm={3}>
-            Email
-          </Form.Label>
-          <Col sm={9}>
-            <Form.Control type="email" placeholder="Enter email" />
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3 title_shiping" controlId="delivery_location">
-        <Form.Label column sm="3">Delivery location:</Form.Label>
-        <Col sm='9'>
-        <Form.Control
-          required
-          type="text"
-          placeholder="Where do you get delivery?"
-          defaultValue=""
-        />
-      {/*  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>*/}
-        </Col>
-      </Form.Group>
-
-   
-      
-
-          <Button variant='primary' type="submit" href='/order'>Ship now!</Button>
-      </Form>  
-    </div>
-
-
-  
-   
-
-
-  </FormContainer>
-  )}
-  </div>
+  );
 }
 
 export default ShippingScreen;

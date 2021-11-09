@@ -1,53 +1,56 @@
-import React from "react";
-import { Form, Button, Row, Col, Container } from "react-bootstrap";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { user_get_profile } from "../action/userAction";
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
-
-const StyleForm = styled.div`
-  h2 {
-    margin-top: 20px;
-    margin-bottom: 40px;
-    font-weight: 900;
-    font-size:25px;
-  }
-  #name {
-    margin-bottom: 20px;
-  }
-  #footer {
-  }
-  .py-3 {
-    margin-top: 20px;
-  }
-  font-size: 15px;
-`;
-
-const StyleTable = styled.div`
-  h2 {
-    margin-top: 20px;
-    margin-bottom: 40px;
-    font-weight: 900;
-    font-size: 25px;
-  }
-  button {
-    padding: 5px;
-    width: 80px;
-    background-color: #000;
-    text-color: #1a1a1a;
-    margin: auto;
-    margin-left: 14px;
-  }
-`;
-
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
 
 function ProfileScreen() {
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  console.log(userLogin);
+  const { userInfo } = userLogin;
+  dispatch(user_get_profile(userInfo.token));
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ email }, { password });
   };
+  const StyleForm = styled.div`
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 40px;
+      font-weight: 900;
+      font-size: 25px;
+    }
+    #name {
+      margin-bottom: 20px;
+    }
+    #footer {
+    }
+    .py-3 {
+      margin-top: 20px;
+    }
+    font-size: 15px;
+  `;
+
+  const StyleTable = styled.div`
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 40px;
+      font-weight: 900;
+      font-size: 25px;
+    }
+    button {
+      padding: 5px;
+      width: 80px;
+      background-color: #000;
+      text-color: #1a1a1a;
+      margin: auto;
+      margin-left: 14px;
+    }
+  `;
 
   return (
     <Row>

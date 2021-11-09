@@ -99,3 +99,26 @@ def registerUser(request):
     except:
         message = {'detail': " User with this email already exists"}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getProfileUser(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['PUT'])
+def userUpdateProfile(request):
+    data = request.data
+
+    user =request.user
+
+    user.first_name = data["first_name"]
+    user.last_name = data["last_name"]
+    user.email = data["email"]
+
+    user.save()
+    serializer = UserSerializerWithToken(user, many = False)
+    return Response(serializer.data)
