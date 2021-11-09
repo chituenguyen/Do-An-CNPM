@@ -35,3 +35,8 @@ export const savePaymentMethod = (data) => (dispatch) => {
 
   localStorage.setItem("payment", JSON.stringify(data));
 };
+export const removeItem = (id) => {
+  let cartItemsTemp = JSON.parse(localStorage.getItem("cartItems"));
+  let cartItems = cartItemsTemp.filter((product) => product.product._id !== id);
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+};

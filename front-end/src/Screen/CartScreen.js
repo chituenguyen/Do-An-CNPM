@@ -11,7 +11,7 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { addToCart } from "../action/cartActions";
+import { addToCart, removeItem } from "../action/cartActions";
 
 function CartScreen({ match, history, location }) {
   const productId = match.params.id;
@@ -75,7 +75,8 @@ function CartScreen({ match, history, location }) {
                   </Col>
 
                   <Col md={1}>
-                    <Button type="button" variant="light">
+                    <Button type="button" variant="light"
+                      onClick={() => removeItem(product.product._id)}>
                       <i className="fas fa-trash"></i>
                     </Button>
                   </Col>
