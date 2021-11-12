@@ -13,9 +13,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import Checkout from "./../components/Checkout";
+import { createOrder } from "./../action/orderAction";
 
 function PlaceOrderScreen({ history, location }) {
-  const orderCreate = useSelector((state) => state.orderCreate);
+  // const orderCreate = useSelector((state) => state.orderCreate);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   cart.itemsPrice = cart.cartItems.reduce(
@@ -27,7 +28,25 @@ function PlaceOrderScreen({ history, location }) {
   if (!cart.payment) {
     history.push("/payment");
   }
-  const placeOrder = () => {};
+  const placeOrder = () => {
+    dispatch(
+      createOrder({
+        orderItem: cart.cartItems,
+        shippingAdress: cart.shipping,
+        paymentMethod: cart.payment,
+        totalPrice: cart.totalPrice,
+        shippingPrice: cart.shippingPrice,
+        itemsPrice: cart.itemsPrice,
+      })
+    );
+  };
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { success, order, error } = orderCreate;
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+    }
+  }, [history, order, success]);
   return (
     <div>
       <Checkout step1 step2 step3 step4></Checkout>

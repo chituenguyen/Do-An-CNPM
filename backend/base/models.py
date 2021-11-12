@@ -72,7 +72,7 @@ class OrderItem(models.Model):
     qty = models.IntegerField(null=True, blank=True, default=0)
     price = models.DecimalField(
         max_digits=7, decimal_places=2, blank=True, null=True)
-    # image
+    image = models.CharField(max_length=200, null=True, blank=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
@@ -84,10 +84,7 @@ class ShippingAddress(models.Model):
         Order, blank=True, null=True, on_delete=models.CASCADE)
     address = models.CharField(max_length=200, null=True, blank=True)
     city = models.CharField(max_length=200, null=True, blank=True)
-    postal_Code = models.CharField(max_length=200, null=True, blank=True)
     country = models.CharField(max_length=200, null=True, blank=True)
-    shipping_Price = models.DecimalField(
-        max_digits=7, decimal_places=2, blank=True, null=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):

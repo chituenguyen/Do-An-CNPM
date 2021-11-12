@@ -10,5 +10,9 @@ urlpatterns = [
     path('users/', views.getUsers, name="getUsers"),
     path('register/', views.registerUser, name="register-User"),
     path('profile/', views.getUserProfile, name="profile-User"),
-    path('update-Profile/', views.userUpdateProfile, name="UserUpdateProfile")
+    path('update-Profile/', views.userUpdateProfile, name="UserUpdateProfile"),
+    path('order/', views.addOrder, name="addOrder"),
+    path('adminlistorder/', views.getOrders, name="adminlistorder"),
+    path('usergetorder/<str:pk>', views.getOrder, name="usergetorder"),
+    path('usergetlistorder', views.usergetmyorder, name="usergetmyorder")
 ]
