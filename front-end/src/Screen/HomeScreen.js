@@ -13,6 +13,7 @@ function HomeScreen() {
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
+  console.log(loading);
   return (
     <div>
       <h3 class="sub-heading"> our dishes </h3>

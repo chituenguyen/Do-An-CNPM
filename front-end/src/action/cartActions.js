@@ -35,8 +35,10 @@ export const savePaymentMethod = (data) => (dispatch) => {
 
   localStorage.setItem("payment", JSON.stringify(data));
 };
-export const removeItem = (id) => {
-  let cartItemsTemp = JSON.parse(localStorage.getItem("cartItems"));
-  let cartItems = cartItemsTemp.filter((product) => product.product._id !== id);
-  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+export const removeItem = (id) => (dispatch, getState) => {
+  dispatch({
+    type: CART_REMOVE_ITEM,
+    payload: id,
+  });
+  localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
 };

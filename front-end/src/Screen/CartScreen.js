@@ -28,6 +28,9 @@ function CartScreen({ match, history, location }) {
   const checkout = () => {
     history.push("/login?redirect=shipping");
   };
+  var removeItem111 = (id) => {
+    dispatch(removeItem(id));
+  };
   return (
     <div>
       <Link to="/" className="btn btn-primary my-3">
@@ -75,8 +78,11 @@ function CartScreen({ match, history, location }) {
                   </Col>
 
                   <Col md={1}>
-                    <Button type="button" variant="light"
-                      onClick={() => removeItem(product.product._id)}>
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => removeItem111(product.product)}
+                    >
                       <i className="fas fa-trash"></i>
                     </Button>
                   </Col>
@@ -89,8 +95,19 @@ function CartScreen({ match, history, location }) {
           <Card>
             <ListGroup variant="flush">
               <ListGroupItem>
-                <h2>SubTotal (5) items</h2>
-                $1000
+                <h2>
+                  SubTotal{" "}
+                  {cart.cartItems.reduce((acc, item) => {
+                    return acc + Number(item.quantity);
+                  }, 0)}
+                  items
+                </h2>
+                $
+                {cart.cartItems
+                  .reduce((acc, item) => {
+                    return acc + Number(item.quantity * item.product.price);
+                  }, 0)
+                  .toFixed(2)}
               </ListGroupItem>
               <ListGroupItem className="d-grid gap-2">
                 <Button

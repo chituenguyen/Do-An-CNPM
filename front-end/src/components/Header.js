@@ -1,6 +1,4 @@
 import React from "react";
-import { Nav, Navbar, Container, Button } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
 import "./../static/header.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,31 +48,23 @@ const NavBarUser = ({ avatar }) => {
       {show === "show" ? (
         <ul className="navbar-user-menu">
           <li>
-            <a href="">
-              <i class="fas fa-cart-plus"></i>
-              My collections
-            </a>
-          </li>
-          <li>
-            <a href="">
+            <Link to="/profile">
               <i class="fas fa-user-alt"></i>
               Profile
-            </a>
+            </Link>
           </li>
+          {userInfo.is_Admin ? (
+            <li>
+              <Link to="/admin/order">
+                <i class="fas fa-money-bill"></i>
+                List Order
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
           <li>
-            <a href="">
-              <i class="fas fa-bell"></i>
-              Notification
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <i class="fas fa-info-circle"></i>
-              Help
-            </a>
-          </li>
-          <li>
-            <a href="" onClick={handleLogout}>
+            <a onClick={handleLogout}>
               <i class="fas fa-sign-out-alt"></i>
               Logout
             </a>
@@ -104,25 +94,25 @@ function Header() {
   ];
   return (
     <header>
-      <a href="/" class="logo">
+      <Link to="/" class="logo">
         <i class="fas fa-utensils"></i>Konoha
-      </a>
+      </Link>
 
       <nav class="navbar">
         <a class="active" href="#home">
           home
         </a>
-        <a href="/">dishes</a>
-        <a href="/">about</a>
-        <a href="/">menu</a>
-        <a href="/">review</a>
+        <Link to="/">dishes</Link>
+        <Link to="/">about</Link>
+        <Link to="/">menu</Link>
+        <Link to="/">review</Link>
       </nav>
       {userInfo ? <NavBarUser avatar={avatar} /> : <NavBarAccount />}
       <div class="icons">
         <i class="fas fa-bars" id="menu-bars"></i>
         <i class="fas fa-search" id="search-icon"></i>
-        <a href="" class="fas fa-heart"></a>
-        <a href="cart" class="fas fa-shopping-cart"></a>
+        <i class="fas fa-heart"></i>
+        <Link to="/cart" class="fas fa-shopping-cart"></Link>
       </div>
 
       {/* NavBarUser */}

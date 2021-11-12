@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { user_get_profile } from "../action/userAction";
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
-import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import OrderScreen from "./OrderScreen";
+import { userGetMyOrder } from "../action/orderAction";
 
-function ProfileScreen() {
+function ProfileScreen({ history }) {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
-  console.log(userLogin);
   const { userInfo } = userLogin;
   dispatch(user_get_profile(userInfo.token));
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ email }, { password });
   };
+  const { order } = useSelector((state) => state.userGetMyOrder);
+  useEffect(() => {
+    if (userInfo) {
+      console.log("1");
+      dispatch(userGetMyOrder(userInfo.token));
+    } else {
+      history.push("/login");
+    }
+  }, [dispatch, history, userInfo]);
+
   const StyleForm = styled.div`
     h2 {
       margin-top: 20px;
@@ -63,8 +72,7 @@ function ProfileScreen() {
             <Form.Control
               type="text"
               placeholder="Enter name"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userInfo.name}
               name="name"
             ></Form.Control>
           </Form.Group>
@@ -75,8 +83,7 @@ function ProfileScreen() {
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={userInfo.email}
               ></Form.Control>
             </Form.Group>
 
@@ -125,42 +132,27 @@ function ProfileScreen() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>
-                  <Button>Detail</Button>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>
-                  <Button>Detail</Button>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>
-                  <Button>Detail</Button>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>
-                  <Button>Detail</Button>
-                </td>
-              </tr>
+              {order.map((order, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{order.create_At}</td>
+                  <td>{order.total_Price} $</td>
+                  <th>
+                    {order.is_Paid ? (
+                      order.paidAt
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </th>
+                  <td>
+                    <LinkContainer to={`/order/${order._id}/`}>
+                      <Button variant="light" className="btn-sm">
+                        Detail
+                      </Button>
+                    </LinkContainer>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </StyleTable>

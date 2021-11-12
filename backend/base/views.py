@@ -113,12 +113,81 @@ def getProfileUser(request):
 def userUpdateProfile(request):
     data = request.data
 
-    user =request.user
+    user = request.user
 
     user.first_name = data["first_name"]
     user.last_name = data["last_name"]
     user.email = data["email"]
 
     user.save()
-    serializer = UserSerializerWithToken(user, many = False)
+    serializer = UserSerializerWithToken(user, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addOrder(request):
+    user = request.user
+    data = request.data
+    orderItem = data['orderItem']
+    address = data['shippingAdress']
+
+    if orderItem and len(data) == 0:
+        return Response({"detail": "No order item"}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        # create order
+        order = Order.objects.create(
+            user=user,
+            payment_Method=data['paymentMethod'],
+            shipping_Price=data['shippingPrice'],
+            total_Price=data['totalPrice'],
+
+        )
+        # create shipping
+        shipping = ShippingAddress.objects.create(
+            order=order,
+            address=address['address'],
+            city=address['city'],
+            country=address['country']
+        )
+        # order and orderItems relationship
+        for i in orderItem:
+            product = Product.objects.get(_id=i['product']['_id'])
+            item = OrderItem.objects.create(
+                product=product,
+                order=order,
+                name=product.name,
+                qty=i['quantity'],
+                price=i['product']['price'],
+                image=product.image.url,
+            )
+        # update quantity
+        product.count_Stock -= item.qty
+        product.save()
+    serializer = OrderSerializer(order, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getOrders(request):
+    orders = Order.objects.all()
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getOrder(request, pk):
+    order = Order.objects.get(_id=pk)
+    serializer = OrderSerializer(order, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def usergetmyorder(request):
+    user = request.user
+    orders = user.order_set.all()
+    serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
