@@ -15,4 +15,5 @@ Open http://localhost:3000 to view it in the browser.
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+  
 To learn Django, check out the [Django documentation](https://docs.djangoproject.com/en/3.2/).
