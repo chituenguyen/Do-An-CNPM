@@ -99,7 +99,7 @@ function CartScreen({ match, history, location }) {
                   SubTotal{" "}
                   {cart.cartItems.reduce((acc, item) => {
                     return acc + Number(item.quantity);
-                  }, 0)}
+                  }, 0)}{" "}
                   items
                 </h2>
                 $

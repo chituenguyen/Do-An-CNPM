@@ -28,6 +28,7 @@ function ShippingScreen({ history }) {
     dispatch(saveShippingAddress({ address, city, country }));
     history.push("/placeorder");
   };
+
   return (
     <div>
       {loading ? (
@@ -49,6 +50,7 @@ function ShippingScreen({ history }) {
                 placeholder="Enter your address"
                 value={address ? address : ""}
                 onChange={(e) => setAddress(e.target.value)}
+                style={{ padding: "1.5rem 1.5rem" }}
               ></Form.Control>
             </Form.Group>
 
@@ -60,6 +62,7 @@ function ShippingScreen({ history }) {
                 placeholder="Enter your city"
                 value={city ? city : ""}
                 onChange={(e) => setCity(e.target.value)}
+                style={{ padding: "1.5rem 1.5rem" }}
               ></Form.Control>
             </Form.Group>
 
@@ -71,13 +74,37 @@ function ShippingScreen({ history }) {
                 placeholder="Enter your country"
                 value={country ? country : ""}
                 onChange={(e) => setCountry(e.target.value)}
+                style={{ padding: "1.5rem 1.5rem" }}
               ></Form.Control>
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button
+              variant="primary"
+              type="submit"
+              style={{ padding: "1.3rem 3rem" }}
+            >
               Continue
             </Button>
           </Form>
+          If you are in the restaurant, please{" "}
+          <button
+            onClick={() => {
+              const address = "In";
+              const city = "The";
+              const country = "Restaurant";
+              dispatch(saveShippingAddress({ address, city, country }));
+              history.push("/placeorder");
+            }}
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer",
+              overflow: "hidden",
+              outline: "none",
+            }}
+          >
+            click me !!!
+          </button>
         </FormContainer>
       )}
     </div>

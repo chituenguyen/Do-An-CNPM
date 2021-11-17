@@ -16,7 +16,6 @@ import Checkout from "./../components/Checkout";
 import { createOrder } from "./../action/orderAction";
 
 function PlaceOrderScreen({ history, location }) {
-  // const orderCreate = useSelector((state) => state.orderCreate);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   cart.itemsPrice = cart.cartItems.reduce(
@@ -42,6 +41,7 @@ function PlaceOrderScreen({ history, location }) {
   };
   const orderCreate = useSelector((state) => state.orderCreate);
   const { success, order, error } = orderCreate;
+
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
@@ -57,7 +57,7 @@ function PlaceOrderScreen({ history, location }) {
               <h2>Shipping</h2>
               <p>
                 <strong>Address:</strong>
-                {cart.shipping.address},{cart.shipping.city}{" "}
+                {cart.shipping.address} {cart.shipping.city}{" "}
                 {cart.shipping.postalCode} {cart.shipping.country}
               </p>
             </ListGroup.Item>
@@ -126,13 +126,13 @@ function PlaceOrderScreen({ history, location }) {
                   <Col>${cart.totalPrice}</Col>
                 </Row>
 
-                {/* {error ? (
+                {error ? (
                   <ListGroup.Item>
                     <Alert variant="info">{error}</Alert>
                   </ListGroup.Item>
                 ) : (
                   ""
-                )} */}
+                )}
               </ListGroup.Item>
               <Button
                 type="button"
@@ -140,7 +140,7 @@ function PlaceOrderScreen({ history, location }) {
                 disabled={cart.cartItems.length === 0}
                 onClick={() => placeOrder()}
               >
-                Place Order
+                Place order
               </Button>
             </ListGroup>
           </Card>
@@ -151,3 +151,5 @@ function PlaceOrderScreen({ history, location }) {
 }
 
 export default PlaceOrderScreen;
+
+//AULqWoK7zngoomgGdteyAR8zwjlqfVbB-zhTe9mLOwH-xasngB-aPwTD2oDjsKbOll8oIrm2uvQp1TyQ
