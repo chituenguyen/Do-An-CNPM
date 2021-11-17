@@ -28,7 +28,7 @@ function Payment({ history }) {
           <Col>
             <Form.Check
               type="radio"
-              label="Paypal or Credit Card"
+              label="Paypal or cash"
               name="paymentMethod"
               checked
               id="paypal"

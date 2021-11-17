@@ -12,6 +12,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
+from datetime import datetime
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -191,3 +192,13 @@ def usergetmyorder(request):
     orders = user.order_set.all()
     serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateOrderToPaid(request, pk):
+    order = Order.objects.get(_id=pk)
+    order.is_Paid = True
+    order.paid_At = datetime.now()
+    order.save()
+    return Response('Order was paid')

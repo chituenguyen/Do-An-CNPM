@@ -1,3 +1,6 @@
 main {
   min-height: 80vh;
 }
+*{
+  font-size: 18px;
+}
