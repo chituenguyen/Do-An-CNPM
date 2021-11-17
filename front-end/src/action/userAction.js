@@ -73,7 +73,6 @@ export const register =
         },
         config
       );
-      console.log(data);
       dispatch({
         type: USER_REGISTER_SUCCESS,
         payload: data,

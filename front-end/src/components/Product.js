@@ -14,7 +14,7 @@ function Product({ product }) {
           <Card.Img src={product.image}></Card.Img>
           <h3 style={{ height: "50px" }}>{product.name}</h3>
           <Rating value={product.rating} color={"var(--green)"}></Rating>
-          <span>$15.99</span> 
+          <span>${product.price}</span>
         </div>
       </Link>
     </div>

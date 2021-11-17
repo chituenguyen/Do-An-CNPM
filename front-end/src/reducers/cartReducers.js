@@ -4,6 +4,10 @@ import {
   CART_SAVE_SHIPPING_ADDRESS,
   CART_PAYMENT_METHOD,
 } from "./../constants/cartConstants";
+import {
+  CART_CLEAR_ITEMS,
+  REMOVE_ADDRESS,
+} from "./../constants/orderConstants";
 export const cartReducers = (
   state = { cartItems: [], shipping: {}, payment: {} },
   action
@@ -43,6 +47,13 @@ export const cartReducers = (
       return {
         ...state,
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+      };
+    case CART_CLEAR_ITEMS:
+      return {
+        ...state,
+        cartItems: [],
+        shipping: [],
+        paymentMethod: {},
       };
     default:
       return state;
