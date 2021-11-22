@@ -202,3 +202,56 @@ def updateOrderToPaid(request, pk):
     order.paid_At = datetime.now()
     order.save()
     return Response('Order was paid')
+
+
+@api_view(["DELETE"])
+@permission_classes([IsAdminUser])
+def AdminDeleteProduct(request, pk):
+    product = Product.objects.get(_id=pk)
+    product.delete()
+    return Response("Delete success")
+
+
+@api_view(["POST"])
+@permission_classes([IsAdminUser])
+def AdminCreateNewProduct(request):
+    print(request.user)
+    user = request.user
+    product = Product.objects.create(
+        user=user,
+        name="Sample Name",
+        brand="Sample Brand",
+        price=0,
+        category="Sample Category",
+        description="Sample discription",
+        count_Stock=0
+    )
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+
+@api_view(["PUT"])
+@permission_classes([IsAdminUser])
+def AdminUpdateProduct(request, pk):
+    data = request.data
+    product = Product.objects.get(_id=pk)
+    product.name = data['product']['name']
+    product.brand = data['product']['brand']
+    product.price = data['product']['price']
+    product.category = data['product']['category']
+    product.description = data['product']['description']
+    product.count_Stock = data['product']['count_Stock']
+    product.save()
+
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def uploadImage(request):
+    data = request.data
+    product_id = data['product._id']
+    product = Product.objects.get(_id=product_id)
+    product.image = request.FILES.get('image')
+    product.save()
+    return Response('Image upload')

@@ -14,6 +14,9 @@ import OrderScreen from "./Screen/OrderScreen";
 import AdminProductListScreen from "./Screen/AdminProductListScreen";
 import Payment from "./Screen/Payment";
 import AdminListOrder from "./Screen/AdminListOrder";
+import AdminListUser from "./Screen/AdminListUser";
+import AdminListProduct from "./Screen/AdminListProduct";
+import AdminEditProduct from "./Screen/AdminEditProduct";
 
 //Hello
 
@@ -38,6 +41,9 @@ function App() {
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/payment" component={Payment} />
           <Route path="/admin/order" component={AdminListOrder} />
+          <Route path="/admin/users" component={AdminListUser} />
+          <Route path="/admin/products" component={AdminListProduct} />
+          <Route path="/admin/product/edit/:id?" component={AdminEditProduct} />
         </Container>
       </main>
       <Footer></Footer>

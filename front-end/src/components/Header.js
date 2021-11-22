@@ -54,12 +54,26 @@ const NavBarUser = ({ avatar }) => {
             </Link>
           </li>
           {userInfo.is_Admin ? (
-            <li>
-              <Link to="/admin/order">
-                <i class="fas fa-money-bill"></i>
-                List Order
-              </Link>
-            </li>
+            <div>
+              <li>
+                <Link to="/admin/order">
+                  <i class="fas fa-money-bill"></i>
+                  List Order
+                </Link>
+              </li>
+              <li>
+                <Link to="/admin/users">
+                  <i class="fas fa-money-bill"></i>
+                  List Users
+                </Link>
+              </li>
+              <li>
+                <Link to="/admin/products">
+                  <i class="fas fa-money-bill"></i>
+                  List Products
+                </Link>
+              </li>
+            </div>
           ) : (
             ""
           )}

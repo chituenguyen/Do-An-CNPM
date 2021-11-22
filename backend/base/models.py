@@ -10,10 +10,10 @@ from django.utils import tree
 class Product(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=SET_NULL, null=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, default="./default.png")
     brand = models.CharField(max_length=100, blank=True, null=True)
     price = models.DecimalField(
-        max_digits=7, decimal_places=2, blank=True, null=True)
+        max_digits=20, decimal_places=2, blank=True, null=True)
     category = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(null=True, blank=True)
     count_Stock = models.IntegerField(null=True, blank=True, default=0)
