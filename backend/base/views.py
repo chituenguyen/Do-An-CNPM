@@ -256,8 +256,6 @@ def uploadImage(request):
     product.image = request.FILES.get('image')
     product.save()
     return Response('Image upload')
-<<<<<<< HEAD
-=======
 
 
 @api_view(['PUT'])
@@ -268,4 +266,3 @@ def updateOrderToDelivered(request, pk):
     order.delivered_At = timezone.now()
     order.save()
     return Response('Order was delivered')
->>>>>>> 85b0cf73f4c0ee34885aef455e6393dd184f48fd
