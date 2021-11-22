@@ -22,5 +22,7 @@ urlpatterns = [
          name="adminCreateNewProduct"),
     path('adminupdateproduct/<str:pk>',
          views.AdminUpdateProduct, name="AdminUpdateProduct"),
-    path('adminupload', views.uploadImage, name="uploadImage")
+    path('adminupload', views.uploadImage, name="uploadImage"),
+    path('adminupdatedelivered/<int:pk>', views.updateOrderToDelivered,
+         name="update-Delivered")
 ]

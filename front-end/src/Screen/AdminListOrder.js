@@ -64,8 +64,8 @@ function AdminListOrder({ history }) {
                 </td>
 
                 <td>
-                  {order.is_Delivered ? (
-                    order.deliveredAt.substring(0, 10)
+                  {order.is_Deliveried ? (
+                    order.delivered_At.substring(0, 10)
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userGetOrder, payOrder } from "../action/orderAction";
+import { userGetOrder, payOrder, deliverOrder } from "../action/orderAction";
 import { Link } from "react-router-dom";
 import {
   Form,
@@ -24,6 +24,8 @@ function OrderScreen({ history, match }) {
 
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userLogin);
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
   const addPaypalScript = () => {
     const script = document.createElement("script");
     script.type = "text/javascript";
@@ -48,11 +50,14 @@ function OrderScreen({ history, match }) {
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, userInfo, successPay]);
+  }, [dispatch, history, userInfo, successPay, successDeliver]);
   const { order, loading } = useSelector((state) => state.userGetOrder);
 
   const successpaymentHander = (paymentResult) => {
     dispatch(payOrder(order._id, paymentResult));
+  };
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order));
   };
   return loading ? (
     ""
@@ -76,8 +81,8 @@ function OrderScreen({ history, match }) {
                 {order.shippingAddress.address} {order.shippingAddress.city}{" "}
                 {order.shippingAddress.country}
               </p>
-              {order.isDeliver ? (
-                <Alert variant="info">Delivered on {order.deliverAt}</Alert>
+              {order.is_Deliveried ? (
+                <Alert variant="info">Delivered on {order.delivered_At}</Alert>
               ) : (
                 <Alert variant="warning">Not Delivered</Alert>
               )}
@@ -188,6 +193,36 @@ function OrderScreen({ history, match }) {
                 </ListGroup.Item>
               )}
             </ListGroup>
+            {loadingDeliver && (
+              <Spinner
+                animation="border"
+                role="status"
+                style={{
+                  height: "100px",
+                  width: "100px",
+                  margin: "auto",
+                  display: "block",
+                }}
+              >
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            )}
+            {userInfo && userInfo.is_Admin && !order.is_Deliveried && (
+              <ListGroup.Item>
+                <Button
+                  type="button"
+                  className="btn btn-block"
+                  onClick={deliverHandler}
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    transform: "translateY(-10px)",
+                  }}
+                >
+                  Mark As Deliver
+                </Button>
+              </ListGroup.Item>
+            )}
           </Card>
         </Col>
       </Row>

@@ -13,6 +13,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from datetime import datetime
+from django.utils import timezone
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -255,3 +256,13 @@ def uploadImage(request):
     product.image = request.FILES.get('image')
     product.save()
     return Response('Image upload')
+
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateOrderToDelivered(request, pk):
+    order = Order.objects.get(_id=pk)
+    order.is_Deliveried = True
+    order.delivered_At = timezone.now()
+    order.save()
+    return Response('Order was delivered')
