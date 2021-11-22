@@ -16,4 +16,11 @@ urlpatterns = [
     path('usergetorder/<str:pk>', views.getOrder, name="usergetorder"),
     path('usergetlistorder', views.usergetmyorder, name="usergetmyorder"),
     path('usergetorder/<str:pk>/pay', views.updateOrderToPaid, name="order-paid"),
+    path('admindeleteproduct/<str:pk>',
+         views.AdminDeleteProduct, name="AdminDeleteProduct"),
+    path('admincreatenewproduct', views.AdminCreateNewProduct,
+         name="adminCreateNewProduct"),
+    path('adminupdateproduct/<str:pk>',
+         views.AdminUpdateProduct, name="AdminUpdateProduct"),
+    path('adminupload', views.uploadImage, name="uploadImage")
 ]

@@ -57,7 +57,7 @@ function AdminListOrder({ history }) {
                 <td>${order.total_Price}</td>
                 <td>
                   {order.is_Paid ? (
-                    order.paidAt.substring(0, 10)
+                    order.paid_At.substring(0, 10)
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}
