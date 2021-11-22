@@ -22,5 +22,11 @@ urlpatterns = [
          name="adminCreateNewProduct"),
     path('adminupdateproduct/<str:pk>',
          views.AdminUpdateProduct, name="AdminUpdateProduct"),
+<<<<<<< HEAD
     path('adminupload', views.uploadImage, name="uploadImage")
+=======
+    path('adminupload', views.uploadImage, name="uploadImage"),
+    path('adminupdatedelivered/<int:pk>', views.updateOrderToDelivered,
+         name="update-Delivered")
+>>>>>>> 85b0cf73f4c0ee34885aef455e6393dd184f48fd
 ]
