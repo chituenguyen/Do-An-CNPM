@@ -1,4 +1,4 @@
-# Restaurant POS 2.0
+# Restaurant POS 2.0 (https://do-an-cnpm.herokuapp.com/#/)
 This project was bootstrapped with Create React App.
 ## Available Scripts
 In the project directory, you can run:
